@@ -32,5 +32,6 @@ Clickhouse作为高效的面向列型数据库管理系统，近年来在国内�
 + ````getMemorySize()````：子程序目的是读取并返回本地内存
 + ````estimateBatchFetch(myCursor, TBNAME)````：子程序目的是计算并返回数据传递的轮次
 
-## 程序模块 getmysql2clickhouse 实现原理
-该程序模块见
+## 程序模块 getmysql2clickhouse 实现步骤
+该程序模块的程序见 [getmysql2clickhouse的package](https://github.com/zhihaogong25/getmysql2clickhouse/blob/main/getmysql2clickhouse/__init__.py) 。
+该程序模块通过[setup程序]()
