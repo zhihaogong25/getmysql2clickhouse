@@ -33,8 +33,16 @@ Clickhouse作为高效的面向列型数据库管理系统，近年来在国内�
 + ````getMemorySize()````：子程序目的是读取并返回本地内存
 + ````estimateBatchFetch(myCursor, TBNAME)````：子程序目的是计算并返回数据传递的轮次
 
-## 程序模块 getmysql2clickhouse 实现步骤
+## 程序模块 getmysql2clickhouse 实现发布的步骤
 
 该程序模块的程序见 [getmysql2clickhouse的package](https://github.com/zhihaogong25/getmysql2clickhouse/blob/main/getmysql2clickhouse/__init__.py)。该程序模块通过[setup.py程序](https://github.com/zhihaogong25/getmysql2clickhouse/blob/main/setup.py)上传到<https://pypi.org>。通过那个网站进行发布。
-上传的命令行为： 1 ````python setup.py sdist build```` 2 ````python setup.py bdist_wheel --universal ```` 3 ````twine upload dist/*````
+上传的bash代码为： 1 ````python setup.py sdist build```` 2 ````python setup.py bdist_wheel --universal ```` 3 ````twine upload dist/*````
+
+## 程序模块 getmysql2clickhouse 测试说明
+
+1 设置了MYSQL数据库和clickhouse单机（无切片无备份），getmysql2clickhouse模块可以传递数据。
+2 设置了MYSQL数据库和clickhouse伪集群（单机，2切片无备份），getmysql2clickhouse模块可以传递数据。
+3 在两台电脑上，目前zookeeper分布式设置没有成功，咱没有能够真正测试该模块在clickhouse集群上的应用。(2021年3月25日晚)
+
+
 
