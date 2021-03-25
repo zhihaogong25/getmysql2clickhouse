@@ -40,9 +40,9 @@ Clickhouse作为高效的面向列型数据库管理系统，近年来在国内�
 
 ## 程序模块 getmysql2clickhouse 测试说明
 
-1 设置了MYSQL数据库和clickhouse单机（无切片无备份），getmysql2clickhouse模块可以传递数据。
-2 设置了MYSQL数据库和clickhouse伪集群（单机，2切片无备份），getmysql2clickhouse模块可以传递数据。
-3 在两台电脑上，目前zookeeper分布式设置没有成功，咱没有能够真正测试该模块在clickhouse集群上的应用。(2021年3月25日晚)
+1. 设置了MYSQL数据库和clickhouse单机（无切片无备份），getmysql2clickhouse模块可以传递数据。
+2. 设置了MYSQL数据库和clickhouse伪集群（单机，2切片无备份），getmysql2clickhouse模块可以传递数据。
+3. 在两台电脑上，目前zookeeper分布式设置没有成功，咱没有能够真正测试该模块在clickhouse集群上的应用。(2021年3月25日晚)
 
 
 
