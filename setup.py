@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
     name='getmysql2clickhouse',
-    version="0.4",
+    version="0.5",
     author='Zhihao Gong',
     author_email='zhihaogong25@gmail.com',
     license='MIT License',
