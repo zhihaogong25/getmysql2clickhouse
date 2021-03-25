@@ -4,6 +4,7 @@
 Clickhouse作为高效的面向列型数据库管理系统，近年来在国内受到了越来越多的科技公司的青睐。基于类似zookeeper分布式配置之后，clickhouse集群可以对数据表进行切分(shard)和备份(replica)，这极大地提升了数据管理的高效和安全。作为基本的应用，该程序模块的目的是基于python将MYSQL数据库表的数据导入到clickhouse数据库表中。
 
 ## 程序模块 getmysql2clickhouse 使用
+
 在Linux终端里，通过````pip install getmysql2clickhouse````安装getmysql2clickhouse模块。该安装会自动安装````pymysql````和````clickhouse````两个python模块。安装完成进入python环境里，输入````import getmysql2clickhouse````即可使用该模块下集成的子程序。
 
 主要子程序包括：
@@ -33,5 +34,7 @@ Clickhouse作为高效的面向列型数据库管理系统，近年来在国内�
 + ````estimateBatchFetch(myCursor, TBNAME)````：子程序目的是计算并返回数据传递的轮次
 
 ## 程序模块 getmysql2clickhouse 实现步骤
-该程序模块的程序见 [getmysql2clickhouse的package](https://github.com/zhihaogong25/getmysql2clickhouse/blob/main/getmysql2clickhouse/__init__.py) 。
-该程序模块通过[setup程序]()
+
+该程序模块的程序见 [getmysql2clickhouse的package](https://github.com/zhihaogong25/getmysql2clickhouse/blob/main/getmysql2clickhouse/__init__.py)。该程序模块通过[setup.py程序](https://github.com/zhihaogong25/getmysql2clickhouse/blob/main/setup.py)上传到<https://pypi.org>。通过那个网站进行发布。
+上传的命令行为： 1 ````python setup.py sdist build```` 2 ````python setup.py bdist_wheel --universal ```` 3 ````twine upload dist/*````
+
