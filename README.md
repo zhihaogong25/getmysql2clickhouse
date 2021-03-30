@@ -63,4 +63,16 @@ bin/zkServer.sh start
 ````
 等到屏幕返回"STARTED"之后， 再使用命令 ````bin/zkServer.sh status````检查运行情况。对于单节点运行时，屏幕返回"mode: standalone"。 对于我这里的三节点情况即为"follower - leader - follower" 模式。
  
-**2. 基于docker搭建clickhouse**：
+**2. 基于docker搭建clickhouse集群**：在不理解其底层原理的前提下，在虚拟机中利用docker来搭建clickhouse，可以部分避免一些未察觉的与环境不匹配。docker的安装可以在网上直接搜索，一般都能安装成功。搭建clickhouse集群基本步参考CSDN文章[使用docker搭建clickhouse](https://blog.csdn.net/weixin_46918845/article/details/115133887?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-1&spm=1001.2101.3001.4242)。其大概的思路是先在一台节点上拉取clickhouse-server的镜像运行作为临时容器之后，将临时容器中的````/etc/clickhouse-server ````拷贝到节点根目录下来。并进行配置的修改，将该文件夹````scp````到所有的节点，然后删去原来临时容器。接着在每个节点上运行clickhouse-server的镜像，运行命令中会将容器中的配置目录定向到节点根目录中````/etc/clickhouse-server ````，同时暴露端口号和添加各个节点的host，这样就搭建完成。
+但是这里我能搭建正常相互通信的clickhouse集群有两个地方需要强调：
+
+1. 一直保持root用户，所有的命令都在root用户下完成。
+
+2. 在修改confg.xml，我的修改如下：
+ ````
+<include_from>/etc/clickhouse-server/metrika.xml</include_from>
+<remote_servers incl="clickhouse_remote_servers" />
+<zookeeper incl="zookeeper-servers" optional="true" />
+<macros incl="macros" />
+ ````
+3. 我这里没有修改user.xml。如果按照CNSD上的文章修改，clickhouse-server无法启动（通过命令````docker ps -a````中发现clickhouse-erver的状态"status"为"exited"，而非"up"）
