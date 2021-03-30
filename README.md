@@ -44,7 +44,11 @@ Clickhouse作为高效的面向列型数据库管理系统，近年来在国内�
 2. 设置了MYSQL数据库和clickhouse伪集群（单机，2切片无备份），getmysql2clickhouse模块可以传递数据。
 
 ## 附录A: 通过docker搭建clickhouse集群(基于zookeeper分布式)
-1. 在root用户下，在目录````/app/````下通过````wget ````方式下载的zookeeper压缩包解包，在zookeeper目录下，创建目录````data````。拷贝目录````conf/zoo_sample.cfg````为````conf/zoo.cfg````
+**搭建zookeeper分布式**： 在root用户下，在目录````/app/````下通过````wget ````方式下载的zookeeper压缩包解包为目录````zookeeper````。在zookeeper目录下，创建目录````data````。拷贝目录````conf/zoo_sample.cfg````为````conf/zoo.cfg````。并修改````zoo.cfg````文件中对于 变量 ````dataDir````(用来存放数据的snapshot) 和 ````dataLogDir````(用来存放操作记录log)。这里我设为
+````
+dataDir=/apps/apache-zookeeper-3.6.2-bin/data
+dataLogDir=/apps/apache-zookeeper-3.6.2-bin/log
+````
 
 
 
