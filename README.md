@@ -79,7 +79,7 @@ bin/zkServer.sh start
 
 4. 查询运行中的问题log使用命令 ````docker logs -f clickhouse-server```` 。
 
-运行了参考网页上的步骤之后，集群下任意一个节点里clickhouse的system.clusters中可以检查集群是否有构建成功，如下：
+运行了参考网页上的步骤之后，集群下任意一个节点里clickhouse的system.clusters中可以检查集群是否有构建成功，如下：(这里是2个切片，2个副本)
 ![Capture](https://user-images.githubusercontent.com/17373280/112940925-67d78e80-9160-11eb-87ea-e9a821138376.JPG)
 
 ## 附录B: 在clickhouse中构建分布表
@@ -101,4 +101,25 @@ create table stock(
 总市值 double not null,
 流通市值  double not null
 )engine=csv;
+````
+在clickhouse中，对于每一个节点，我们都构建一个该节点的表。表的类型如下
+````
+CREATE TABLE `stock_replica` (
+  `日期` Date,
+  `股票代码` String,
+  `名称` String,
+  `收盘价` Float32,
+  `最高价` Float32,
+  `最低价` Float32,
+  `开盘价` Float32,
+  `涨跌额` Float32,
+  `涨跌幅` Float32,
+  `换手率` Float32,
+  `成交量` Float64,
+  `成交金额` Float64,
+   `总市值` Float64,
+   `流通市值` Float64
+  ) ENGINE = MergeTree
+ORDER BY (`日期`)
+SETTINGS index_granularity = 8192;
 ````
