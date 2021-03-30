@@ -61,4 +61,5 @@ server.3=host136:2888:3888
 ````
 bin/zkServer.sh start
 ````
-等到屏幕返回"STARTED"之后， 再使用命令 ```` bin/zkServer.sh status `````
+等到屏幕返回"STARTED"之后， 再使用命令 ````bin/zkServer.sh status````检查运行情况。对于单节点运行时，屏幕返回"mode: standalone"。 对于我这里的三节点情况即为"follower - leader - follower" 模式。
+ 
