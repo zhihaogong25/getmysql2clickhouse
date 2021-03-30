@@ -102,7 +102,7 @@ create table stock(
 流通市值  double not null
 )engine=csv;
 ````
-在clickhouse中，对于每一个节点，我们都构建一个该节点的表。表的类型如下
+在clickhouse中，对于每一个节点，我们都构建一个该节点的表````stock_replica````。表的类型如下
 ````
 CREATE TABLE `stock_replica` (
   `日期` Date,
@@ -123,3 +123,10 @@ CREATE TABLE `stock_replica` (
 ORDER BY (`日期`)
 SETTINGS index_granularity = 8192;
 ````
+在操作的那个节点上，我们进一步构建分布表````stock_all````，命令如下：
+````
+CREATE TABLE `stock_all` as `stock_replica`
+ENGINE = Distributed(cluster_2shards_2replicas, datasets, stock_replica, rand()) 
+````
+在操作的这台节点上，通过ip地址：端口= 172.17.0.1：9000，就可以用getmysql2clickhouse的python包向
+分布表````stock_all````写入数据，这些数据会被切分和备份到所有节点的````stock_replica````表中去。
